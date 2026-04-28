@@ -5,23 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
 function playGame(gameType) {
     const currentUser = localStorage.getItem('currentUser');
 
-    if (!currentUser) {
-        // Для гостей показываем сообщение
-        if (confirm('👋 Чтобы сохранять прогресс и получать достижения, войдите в аккаунт!\n\nХотите войти или зарегистрироваться?')) {
-            openModal();
-        } else {
-            alert('Игра запускается в гостевом режиме. Прогресс не сохранится!');
-            startGameDemo(gameType);
-        }
-    } else {
-        startGameDemo(gameType);
-    }
-}
-
-function startGameDemo(gameType) {
     switch(gameType) {
         case 'memory':
-            alert("🎴 Игра 'Найди пару' скоро появится!");
+            // Запускаем игру "Найди пару"
+            window.location.href = 'memory-game.html';
             break;
         case 'attention':
             alert("🎯 Игра 'Быстрая реакция' в разработке!");
@@ -34,5 +21,59 @@ function startGameDemo(gameType) {
             break;
         default:
             alert("Игра скоро появится!");
+    }
+}
+
+// Функция для проверки авторизации (из main.js)
+function checkAuth() {
+    const currentUser = localStorage.getItem('currentUser');
+    const userInfo = document.getElementById('userInfo');
+    const authButtons = document.getElementById('authButtons');
+    const userName = document.getElementById('userName');
+
+    if (currentUser) {
+        const user = JSON.parse(currentUser);
+        if (userName) {
+            userName.textContent = `👋 ${user.name}`;
+        }
+        if (userInfo) {
+            userInfo.style.display = 'flex';
+        }
+        if (authButtons) {
+            authButtons.style.display = 'none';
+        }
+    } else {
+        if (userInfo) {
+            userInfo.style.display = 'none';
+        }
+        if (authButtons) {
+            authButtons.style.display = 'flex';
+        }
+    }
+}
+
+// Функция выхода (из main.js)
+function logout() {
+    localStorage.removeItem('currentUser');
+    checkAuth();
+    location.reload();
+}
+
+// Функция открытия модального окна (из main.js)
+function openModal(tab = 'login') {
+    const modal = document.getElementById('authModal');
+    if (modal) {
+        modal.style.display = 'block';
+        if (typeof showModalTab === 'function') {
+            showModalTab(tab);
+        }
+    }
+}
+
+// Функция закрытия модального окна (из main.js)
+function closeModal() {
+    const modal = document.getElementById('authModal');
+    if (modal) {
+        modal.style.display = 'none';
     }
 }
