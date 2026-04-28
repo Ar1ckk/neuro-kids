@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход / Регистрация - НейроКидс</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<div class="login-container">
+    <div class="login-box">
+        <div class="logo">
+            <h1>🧠 НейроКидс</h1>
+            <p>Развиваем мозг весело!</p>
+        </div>
+
+        <!-- Вкладки -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('login')">Вход</button>
+            <button class="tab-btn" onclick="showTab('register')">Регистрация</button>
+        </div>
+
+        <!-- Форма входа -->
+        <div id="loginForm" class="form-container active">
+            <h2>Добро пожаловать!</h2>
+            <form onsubmit="loginUser(event)">
+                <div class="input-group">
+                    <label>👤 Имя пользователя</label>
+                    <input type="text" id="loginUsername" required placeholder="Введите имя">
+                </div>
+                <div class="input-group">
+                    <label>🔒 Пароль</label>
+                    <input type="password" id="loginPassword" required placeholder="Введите пароль">
+                </div>
+                <button type="submit" class="btn-submit">Войти</button>
+            </form>
+        </div>
+
+        <!-- Форма регистрации -->
+        <div id="registerForm" class="form-container">
+            <h2>Создать аккаунт</h2>
+            <form onsubmit="registerUser(event)">
+                <div class="input-group">
+                    <label>👶 Имя ребенка</label>
+                    <input type="text" id="regName" required placeholder="Как зовут?">
+                </div>
+                <div class="input-group">
+                    <label>📅 Возраст</label>
+                    <input type="number" id="regAge" min="3" max="12" required placeholder="Сколько лет?">
+                </div>
+                <div class="input-group">
+                    <label>👤 Придумайте логин</label>
+                    <input type="text" id="regUsername" required placeholder="Логин">
+                </div>
+                <div class="input-group">
+                    <label>🔒 Придумайте пароль</label>
+                    <input type="password" id="regPassword" required placeholder="Пароль">
+                </div>
+                <button type="submit" class="btn-submit">Зарегистрироваться</button>
+            </form>
+        </div>
+
+        <div id="message" class="message"></div>
+    </div>
+</div>
+
+<script src="js/login.js"></script>
+</body>
+</html>
