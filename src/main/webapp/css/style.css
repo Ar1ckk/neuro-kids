@@ -403,3 +403,18 @@ footer {
         margin-top: 10px;
     }
 }
+.sound-toggle-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s;
+    margin-right: 10px;
+}
+
+.sound-toggle-btn:hover {
+    background: #45a049;
+}

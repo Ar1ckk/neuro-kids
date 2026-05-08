@@ -2,15 +2,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     checkAuth();
 
-    // Показываем модальное окно ТОЛЬКО на главной странице (index.html)
-    // и только если пользователь не авторизован
+    // Показываем модальное окно ТОЛЬКО на главной странице
     const currentUser = localStorage.getItem('currentUser');
     const isHomePage = window.location.pathname.includes('index.html') ||
-                       window.location.pathname === '/' ||
-                       window.location.pathname.endsWith('/neuro-kids/');
+        window.location.pathname === '/' ||
+        window.location.pathname.endsWith('/neuro-kids/');
 
     if (!currentUser && isHomePage) {
-        // Показываем окно через 1 секунду только на главной
         setTimeout(() => {
             openModal('login');
         }, 1000);
@@ -44,19 +42,15 @@ function checkAuth() {
     }
 }
 
-// Открыть модальное окно с нужной вкладкой
 function openModal(tab = 'login') {
     const modal = document.getElementById('authModal');
     if (modal) {
         modal.style.display = 'block';
-        // Показываем нужную вкладку
         showModalTab(tab);
-        // Сбрасываем формы
         resetModalForms();
     }
 }
 
-// Закрыть модальное окно
 function closeModal() {
     const modal = document.getElementById('authModal');
     if (modal) {
@@ -65,9 +59,7 @@ function closeModal() {
     }
 }
 
-// Сброс форм
 function resetModalForms() {
-    // Очищаем поля
     const inputs = document.querySelectorAll('.modal-content input');
     inputs.forEach(input => input.value = '');
 
@@ -78,7 +70,6 @@ function resetModalForms() {
     }
 }
 
-// Переключение вкладок в модальном окне
 function showModalTab(tab) {
     const loginForm = document.getElementById('modalLoginForm');
     const registerForm = document.getElementById('modalRegisterForm');
@@ -96,7 +87,6 @@ function showModalTab(tab) {
         if (tabs[1]) tabs[1].classList.add('active');
     }
 
-    // Очищаем сообщение
     const messageDiv = document.getElementById('modalMessage');
     if (messageDiv) {
         messageDiv.style.display = 'none';
@@ -104,7 +94,6 @@ function showModalTab(tab) {
     }
 }
 
-// Регистрация в модальном окне
 function modalRegisterUser(event) {
     event.preventDefault();
 
@@ -136,11 +125,9 @@ function modalRegisterUser(event) {
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 
-    // Автоматически входим
     modalLoginUserDirect(username, password);
 }
 
-// Вход в модальном окне
 function modalLoginUser(event) {
     event.preventDefault();
 
@@ -161,7 +148,7 @@ function modalLoginUserDirect(username, password) {
         setTimeout(() => {
             closeModal();
             checkAuth();
-            location.reload(); // Обновляем страницу для отображения данных пользователя
+            location.reload();
         }, 1000);
     } else {
         showModalMessage('Неверный логин или пароль!', 'error');
@@ -194,7 +181,6 @@ function logout() {
     location.reload();
 }
 
-// Закрытие модального окна при клике вне его
 window.onclick = function(event) {
     const modal = document.getElementById('authModal');
     if (event.target == modal) {

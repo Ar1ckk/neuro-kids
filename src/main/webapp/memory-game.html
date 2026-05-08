@@ -80,9 +80,11 @@
         </nav>
         <div class="user-info" id="userInfo" style="display: none;">
             <span id="userName"></span>
+            <button class="sound-toggle-btn" id="soundToggle" onclick="toggleSound()">🔊 Звук вкл</button>
             <button class="logout-btn" onclick="logout()">Выйти</button>
         </div>
         <div class="auth-buttons" id="authButtons">
+            <button class="sound-toggle-btn" id="soundToggleGuest" onclick="toggleSound()">🔊 Звук вкл</button>
             <button class="login-btn" onclick="openModal('login')">Вход</button>
             <button class="register-btn" onclick="openModal('register')">Регистрация</button>
         </div>
@@ -146,6 +148,7 @@
     </div>
 </footer>
 
+<script src="js/sounds.js"></script>
 <script src="js/main.js"></script>
 <script src="js/memory-game.js"></script>
 </body>
