@@ -13,7 +13,7 @@ function playGame(gameType) {
             window.location.href = 'attention-game.html';
             break;
         case 'logic':
-            alert("🧩 Игра 'Логические задачи' будет готова скоро!");
+            window.location.href = 'logic-game.html';
             break;
         case 'math':
             alert("🔢 Игра 'Веселая математика' уже в пути!");
