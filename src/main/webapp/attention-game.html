@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Быстрая реакция - НейроКидс</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/attention-game.css">
+</head>
+<body>
+<!-- Модальное окно регистрации/входа -->
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="logo">
+                <h1>🧠 НейроКидс</h1>
+                <p>Развиваем мозг весело!</p>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showModalTab('login')">Вход</button>
+            <button class="tab-btn" onclick="showModalTab('register')">Регистрация</button>
+        </div>
+
+        <div id="modalLoginForm" class="form-container active">
+            <form onsubmit="modalLoginUser(event)">
+                <div class="input-group">
+                    <label>👤 Логин</label>
+                    <input type="text" id="modalLoginUsername" required placeholder="Введите логин">
+                </div>
+                <div class="input-group">
+                    <label>🔒 Пароль</label>
+                    <input type="password" id="modalLoginPassword" required placeholder="Введите пароль">
+                </div>
+                <button type="submit" class="btn-submit">Войти</button>
+            </form>
+        </div>
+
+        <div id="modalRegisterForm" class="form-container">
+            <form onsubmit="modalRegisterUser(event)">
+                <div class="input-group">
+                    <label>👶 Имя ребенка</label>
+                    <input type="text" id="modalRegName" required placeholder="Как зовут?">
+                </div>
+                <div class="input-group">
+                    <label>📅 Возраст</label>
+                    <input type="number" id="modalRegAge" min="3" max="12" required placeholder="Сколько лет?">
+                </div>
+                <div class="input-group">
+                    <label>👤 Логин</label>
+                    <input type="text" id="modalRegUsername" required placeholder="Придумайте логин">
+                </div>
+                <div class="input-group">
+                    <label>🔒 Пароль</label>
+                    <input type="password" id="modalRegPassword" required placeholder="Придумайте пароль">
+                </div>
+                <button type="submit" class="btn-submit">Зарегистрироваться</button>
+            </form>
+        </div>
+
+        <div id="modalMessage" class="message"></div>
+        <div class="guest-link">
+            <button onclick="closeModal()" class="guest-btn">Продолжить без регистрации →</button>
+        </div>
+    </div>
+</div>
+
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>🧠 НейроКидс</h1>
+            <p>Развиваем мозг весело!</p>
+        </div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="games.html">Игры</a>
+            <a href="progress.html">Мой прогресс</a>
+        </nav>
+        <div class="user-info" id="userInfo" style="display: none;">
+            <span id="userName"></span>
+            <button class="logout-btn" onclick="logout()">Выйти</button>
+        </div>
+        <div class="auth-buttons" id="authButtons">
+            <button class="login-btn" onclick="openModal('login')">Вход</button>
+            <button class="register-btn" onclick="openModal('register')">Регистрация</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="attention-game-section">
+        <div class="container">
+            <div class="game-header">
+                <h2>🎯 Быстрая реакция</h2>
+                <div class="game-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">Счет:</span>
+                        <span class="stat-value" id="score">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Попаданий:</span>
+                        <span class="stat-value" id="hits">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Промахов:</span>
+                        <span class="stat-value" id="misses">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Время:</span>
+                        <span class="stat-value" id="timer">00:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="difficulty-selector">
+                <button class="difficulty-btn active" data-difficulty="easy">😊 Легко</button>
+                <button class="difficulty-btn" data-difficulty="medium">🤔 Средне</button>
+                <button class="difficulty-btn" data-difficulty="hard">🧐 Сложно</button>
+            </div>
+
+            <div class="game-area" id="gameArea">
+                <div class="target" id="target" style="display: none;">🎯</div>
+                <div class="game-message" id="gameMessage">
+                    <h3>Нажми "Старт" чтобы начать!</h3>
+                    <p>Кликай на появляющиеся цели как можно быстрее!</p>
+                </div>
+            </div>
+
+            <div class="game-controls">
+                <button class="btn-start" id="startBtn" onclick="startGame()">▶ Начать игру</button>
+                <button class="btn-restart" onclick="restartGame()">🔄 Заново</button>
+                <button class="btn-exit" onclick="goBack()">← Вернуться к играм</button>
+            </div>
+
+            <div id="gameOverMessage" class="game-over-message" style="display: none;">
+                <div class="game-over-content">
+                    <div class="game-over-emoji">🏆</div>
+                    <h3>Игра окончена!</h3>
+                    <p>Ваш результат: <span id="finalScore"></span> очков</p>
+                    <p>Попаданий: <span id="finalHits"></span></p>
+                    <p>Промахов: <span id="finalMisses"></span></p>
+                    <p>Точность: <span id="finalAccuracy"></span>%</p>
+                    <button class="btn" onclick="startGame()">Играть ещё →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 НейроКидс - Развиваем детей с заботой</p>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/attention-game.js"></script>
+</body>
+</html>

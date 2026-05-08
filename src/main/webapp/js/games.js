@@ -7,11 +7,10 @@ function playGame(gameType) {
 
     switch(gameType) {
         case 'memory':
-            // Запускаем игру "Найди пару"
             window.location.href = 'memory-game.html';
             break;
         case 'attention':
-            alert("🎯 Игра 'Быстрая реакция' в разработке!");
+            window.location.href = 'attention-game.html';
             break;
         case 'logic':
             alert("🧩 Игра 'Логические задачи' будет готова скоро!");
