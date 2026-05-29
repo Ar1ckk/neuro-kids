@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нейропсихологические тесты - НейроКидс</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/neuro-tests.css">
+</head>
+<body>
+<!-- Модальное окно регистрации/входа -->
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="logo">
+                <h1>🧠 НейроКидс</h1>
+                <p>Развиваем мозг весело!</p>
+            </div>
+        </div>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showModalTab('login')">Вход</button>
+            <button class="tab-btn" onclick="showModalTab('register')">Регистрация</button>
+        </div>
+        <div id="modalLoginForm" class="form-container active">
+            <form onsubmit="modalLoginUser(event)">
+                <div class="input-group">
+                    <label>👤 Логин</label>
+                    <input type="text" id="modalLoginUsername" required placeholder="Введите логин">
+                </div>
+                <div class="input-group">
+                    <label>🔒 Пароль</label>
+                    <input type="password" id="modalLoginPassword" required placeholder="Введите пароль">
+                </div>
+                <button type="submit" class="btn-submit">Войти</button>
+            </form>
+        </div>
+        <div id="modalRegisterForm" class="form-container">
+            <form onsubmit="modalRegisterUser(event)">
+                <div class="input-group">
+                    <label>👶 Имя ребенка</label>
+                    <input type="text" id="modalRegName" required placeholder="Как зовут?">
+                </div>
+                <div class="input-group">
+                    <label>📅 Возраст</label>
+                    <input type="number" id="modalRegAge" min="3" max="12" required placeholder="Сколько лет?">
+                </div>
+                <div class="input-group">
+                    <label>👤 Логин</label>
+                    <input type="text" id="modalRegUsername" required placeholder="Придумайте логин">
+                </div>
+                <div class="input-group">
+                    <label>🔒 Пароль</label>
+                    <input type="password" id="modalRegPassword" required placeholder="Придумайте пароль">
+                </div>
+                <button type="submit" class="btn-submit">Зарегистрироваться</button>
+            </form>
+        </div>
+        <div id="modalMessage" class="message"></div>
+        <div class="guest-link">
+            <button onclick="closeModal()" class="guest-btn">Продолжить без регистрации →</button>
+        </div>
+    </div>
+</div>
+
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>🧠 НейроКидс</h1>
+            <p>Развиваем мозг весело!</p>
+        </div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="games.html">Игры</a>
+            <a href="neuro-tests.html" class="active">Тесты</a>
+            <a href="parent-session.html">Занятие</a>
+            <a href="progress.html">Мой прогресс</a>
+        </nav>
+        <div class="user-info" id="userInfo" style="display: none;">
+            <span id="userName"></span>
+            <button class="sound-toggle-btn" id="soundToggle" onclick="toggleSound()">🔊 Звук вкл</button>
+            <button class="logout-btn" onclick="logout()">Выйти</button>
+        </div>
+        <div class="auth-buttons" id="authButtons">
+            <button class="sound-toggle-btn" id="soundToggleGuest" onclick="toggleSound()">🔊 Звук вкл</button>
+            <button class="login-btn" onclick="openModal('login')">Вход</button>
+            <button class="register-btn" onclick="openModal('register')">Регистрация</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="neuro-tests-section">
+        <div class="container">
+            <div class="page-header">
+                <h2>🧠 Нейропсихологические тесты</h2>
+                <p class="subtitle">Пройдите диагностику вместе с ребёнком. Тесты помогут оценить развитие когнитивных функций.</p>
+            </div>
+
+            <div class="tests-grid">
+                <!-- Тест 1: Таблица Шульте -->
+                <div class="test-card" onclick="openTest('schulte')">
+                    <div class="test-icon">📊</div>
+                    <h3>Таблица Шульте</h3>
+                    <p>Классический тест на внимание и скорость восприятия. Нужно быстро находить цифры по порядку.</p>
+                    <div class="test-meta">
+                        <span class="test-age">👶 5+ лет</span>
+                        <span class="test-time">⏱ 2-3 мин</span>
+                    </div>
+                    <div class="test-status" id="schulte-status">Не пройден</div>
+                </div>
+
+                <!-- Тест 2: Корректурная проба -->
+                <div class="test-card" onclick="openTest('correction')">
+                    <div class="test-icon">✏️</div>
+                    <h3>Корректурная проба</h3>
+                    <p>Тест на концентрацию внимания и помехоустойчивость. Нужно зачёркивать заданные символы.</p>
+                    <div class="test-meta">
+                        <span class="test-age">👶 6+ лет</span>
+                        <span class="test-time">⏱ 3-5 мин</span>
+                    </div>
+                    <div class="test-status" id="correction-status">Не пройден</div>
+                </div>
+
+                <!-- Тест 3: Тест Струпа -->
+                <div class="test-card" onclick="openTest('stroop')">
+                    <div class="test-icon">🎨</div>
+                    <h3>Тест Струпа</h3>
+                    <p>Тест на когнитивную гибкость. Нужно называть цвет слова, игнорируя его значение.</p>
+                    <div class="test-meta">
+                        <span class="test-age">👶 7+ лет</span>
+                        <span class="test-time">⏱ 2-3 мин</span>
+                    </div>
+                    <div class="test-status" id="stroop-status">Не пройден</div>
+                </div>
+
+                <!-- Тест 4: Запоминание картинок -->
+                <div class="test-card" onclick="openTest('memory')">
+                    <div class="test-icon">🖼️</div>
+                    <h3>Зрительная память</h3>
+                    <p>Тест на кратковременную зрительную память. Запомни картинки и найди их.</p>
+                    <div class="test-meta">
+                        <span class="test-age">👶 4+ лет</span>
+                        <span class="test-time">⏱ 2 мин</span>
+                    </div>
+                    <div class="test-status" id="memory-status">Не пройден</div>
+                </div>
+            </div>
+
+            <div class="test-info-box">
+                <h3>📋 Как проходить тесты?</h3>
+                <ul>
+                    <li>Тесты выполняются вместе с родителем, который фиксирует результаты</li>
+                    <li>Важно создать спокойную обстановку без отвлекающих факторов</li>
+                    <li>Результаты сохраняются в истории и помогают отслеживать прогресс</li>
+                    <li>При низких результатах не стоит расстраиваться — это лишь диагностика</li>
+                    <li>Рекомендуется проходить тесты раз в 2-3 месяца для отслеживания динамики</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 НейроКидс - Развиваем детей с заботой</p>
+    </div>
+</footer>
+
+<script src="js/sounds.js"></script>
+<script src="js/main.js"></script>
+<script src="js/neuro-tests.js"></script>
+</body>
+</html>

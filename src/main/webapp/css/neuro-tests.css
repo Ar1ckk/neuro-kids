@@ -1,0 +1,430 @@
+.neuro-tests-section {
+    padding: 40px 0;
+    min-height: 80vh;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h2 {
+    font-size: 36px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.page-header .subtitle {
+    font-size: 18px;
+    color: rgba(255,255,255,0.9);
+}
+
+.tests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.test-card {
+    background: white;
+    border-radius: 25px;
+    padding: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.test-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.test-icon {
+    font-size: 60px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.test-card h3 {
+    font-size: 22px;
+    color: #667eea;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.test-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.test-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 12px;
+    color: #999;
+}
+
+.test-status {
+    text-align: center;
+    padding: 6px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #f0f0f0;
+    color: #999;
+}
+
+.test-status.passed {
+    background: #4CAF50;
+    color: white;
+}
+
+.test-info-box {
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.test-info-box h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.test-info-box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.test-info-box li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: #555;
+}
+
+.test-info-box li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* Стили для модального окна теста */
+.test-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.test-modal-content {
+    background: white;
+    border-radius: 30px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    color: #ff4757;
+}
+
+.test-modal-body {
+    padding: 30px;
+}
+
+.test-title {
+    font-size: 28px;
+    color: #667eea;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Стили для таблицы Шульте */
+.schulte-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.schulte-cell {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.schulte-cell:hover {
+    transform: scale(1.05);
+}
+
+.schulte-cell.correct {
+    background: #4CAF50;
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* Стили для корректурной пробы */
+.correction-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: monospace;
+    font-size: 28px;
+    line-height: 1.8;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.correction-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+.correction-symbol {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.correction-symbol:hover {
+    background: #e0e0e0;
+}
+
+.correction-symbol.crossed {
+    text-decoration: line-through;
+    background: #ffeb3b;
+    color: #333;
+}
+
+/* Стили для теста Струпа */
+.stroop-card {
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+}
+
+.stroop-word {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+}
+
+.stroop-options {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.stroop-option {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+
+.stroop-option:hover {
+    transform: scale(1.05);
+}
+
+/* Стили для теста памяти */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.memory-card.matched {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.test-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f0f0f0;
+    border-radius: 15px;
+}
+
+.test-stat {
+    text-align: center;
+}
+
+.test-stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.test-stat-label {
+    font-size: 12px;
+    color: #666;
+}
+
+.test-timer {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff6b6b;
+}
+
+.test-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.test-btn:hover {
+    transform: scale(1.05);
+}
+
+.test-result {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.test-result h4 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.result-score {
+    font-size: 36px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin: 10px 0;
+}
+
+.result-evaluation {
+    font-size: 18px;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.result-evaluation.excellent {
+    background: #d4edda;
+    color: #155724;
+}
+
+.result-evaluation.good {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.result-evaluation.average {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.result-evaluation.poor {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+@media (max-width: 768px) {
+    .schulte-grid {
+        gap: 5px;
+    }
+
+    .schulte-cell {
+        font-size: 16px;
+    }
+
+    .stroop-word {
+        font-size: 32px;
+    }
+
+    .correction-symbol {
+        width: 35px;
+        font-size: 20px;
+    }
+}
