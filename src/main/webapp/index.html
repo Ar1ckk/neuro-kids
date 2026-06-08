@@ -75,7 +75,7 @@
             <p>Развиваем мозг весело!</p>
         </div>
         <nav>
-            <a href="index.html">Главная</a>
+            <a href="index.html" class="active">Главная</a>
             <a href="games.html">Игры</a>
             <a href="neuro-tests.html">Тесты</a>
             <a href="parent-session.html">Занятие</a>
@@ -134,8 +134,40 @@
     <div class="container">
         <p>© 2025 НейроКидс - Развиваем детей с заботой</p>
     </div>
+    <!-- Секретная пасхалка - невидимая кнопка в левом нижнем углу -->
+    <div id="secretButton" style="position: fixed; bottom: 5px; left: 5px; width: 40px; height: 40px; opacity: 0; cursor: pointer; z-index: 999;"></div>
 </footer>
 
 <script src="js/main.js"></script>
+
+<!-- Скрипт пасхалки -->
+<script>
+    // Секретная пасхалка - нажми 3 раза на невидимую кнопку
+    let secretClickCount = 0;
+    let secretTimer = null;
+
+    const secretButton = document.getElementById('secretButton');
+
+    if (secretButton) {
+        secretButton.addEventListener('click', function() {
+            secretClickCount++;
+
+            // Сброс таймера при каждом нажатии
+            if (secretTimer) clearTimeout(secretTimer);
+
+            // Если нажали 3 раза
+            if (secretClickCount >= 3) {
+                secretClickCount = 0;
+                window.location.href = 'secret.html';
+            }
+
+            // Таймер сброса счётчика (1 секунда)
+            secretTimer = setTimeout(() => {
+                secretClickCount = 0;
+            }, 1000);
+        });
+    }
+</script>
+
 </body>
 </html>
